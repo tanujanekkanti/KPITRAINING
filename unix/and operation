@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "enter a number"
+read n1
+if [ $n1 -lt 48 ] && [ $n1 -eq 48 ]
+then
+        echo "your number is greater than 48"
+else
+        echo "your number is lesser than 48"
+
+fi
