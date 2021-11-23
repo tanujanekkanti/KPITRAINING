@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "enter the n1 value"
+read n1
+echo "enter the n2 value"
+read n2
+sum=$(($n1 + $n2))
+echo "sum is " $sum
