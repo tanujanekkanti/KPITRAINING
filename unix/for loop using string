@@ -1,0 +1,7 @@
+!#/bin/bash
+echo "enter a string s"
+read s
+for i in $s
+do
+       echo $i
+done
