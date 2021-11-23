@@ -1,0 +1,13 @@
+#!/bin/bash
+func () {
+        echo "KPI PARTNERS"
+}
+func
+
+---------------
+
+#!/bin/bash
+func () {
+       echo "first function $1 $2"        #with parameters
+}
+func kpi company
