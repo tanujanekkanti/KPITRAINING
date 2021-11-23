@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "enter the two values for n1 and n2"
+read n1 n2
+div=$(($n1 / $n2))
+echo "value is " $div
