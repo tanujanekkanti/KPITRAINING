@@ -1,0 +1,520 @@
+1.	load the given textfile in HDFS.
+
+[cloudera@quickstart ~]$ hdfs dfs -ls
+Found 24 items
+drwx------   - cloudera cloudera          0 2022-01-20 03:28 .staging
+drwxr-xr-x   - cloudera cloudera          0 2022-01-12 01:17 CHARACTER_SETS
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:09 avro_json_write
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:15 bigdata
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:15 csv_dir
+-rw-r--r--   1 cloudera cloudera         39 2022-01-20 02:50 example.txt
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 02:32 hdfs
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 08:36 import_avro
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_avro_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:13 json_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:39 json_orc
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_orc_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:38 json_parquet
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_parquet_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:11 orc_dir
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:28 output
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:14 parquet_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:11 parquet_json_write
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 13:40 part_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 14:01 part_dir2
+-rw-r--r--   1 cloudera cloudera         70 2022-01-20 03:20 practice.txt
+-rw-r--r--   1 cloudera cloudera         37 2022-01-09 22:32 sample.txt
+-rw-r--r--   1 cloudera cloudera         49 2022-01-11 03:08 sample_kpi.csv
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 09:04 zeyo_dir
+[cloudera@quickstart ~]$ dir
+avro		     cm_api.py	devices.json  eclipse			  express-deployment.json  hadoop	  kerberos    Music	     part_dir	   Public	sample_kpi.csv	Templates  zeyo_tab.java
+CHARACTER_SETS.java  data1	Documents     emp.java			  external_jars		   HiveDirectory  kpi_hadoop  parcels	     Pictures	   rakeshdata	sample.txt	Videos
+cloudera-manager     Desktop	Downloads     enterprise-deployment.json  external-unified	   input.txt	  lib	      parquet_write  practice.txt  rakeshdata1	sparkjars_exec	workspace
+[cloudera@quickstart ~]$ dir kpi_hadoop
+[cloudera@quickstart ~]$ cd kpi_hadoop
+[cloudera@quickstart kpi_hadoop]$ ls
+[cloudera@quickstart kpi_hadoop]$ vi words.txt
+[cloudera@quickstart kpi_hadoop]$ cat words.txt
+It's a truly pleasant experience to read this book, actually I should confess that I laughed A LOT in the reading. The book is hilarious.
+
+Besides the fun part, I was inspired by this book too. This book went through the early history of Personal Computer industry, gave the vivid silhouettes of the people, the companies and Silicon Valley in this industry. Mr.Cringely examined why today's Information Technology industry is what it is now, and how it became like this.
+
+The book provided the facts and opinion about how the high tech companies succeeded, and how many more failed. Why Bill Gates is the richest person in the world, and how Steve Jobs and Steve Wozniak created the most beloved high tech company in the world.
+
+It used to say that reading history can make people understand the rise and fall of things. We can learn the lessons from it, and get new ideas or patterns from the past success. Today Personal Computer is declining, and the focus is shifting to Smart Phone and Tablet. Although product is changing, the similar struggles, fights, winning and loss are still happening lively everyday in this industry, just like what it did in the old days.
+
+
+[cloudera@quickstart kpi_hadoop]$ hadoop fs -put words.txt /user/cloudera
+[cloudera@quickstart kpi_hadoop]$ hdfs dfs -ls /user/cloudera
+Found 25 items
+drwx------   - cloudera cloudera          0 2022-01-20 03:28 /user/cloudera/.staging
+drwxr-xr-x   - cloudera cloudera          0 2022-01-12 01:17 /user/cloudera/CHARACTER_SETS
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:09 /user/cloudera/avro_json_write
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:15 /user/cloudera/bigdata
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:15 /user/cloudera/csv_dir
+-rw-r--r--   1 cloudera cloudera         39 2022-01-20 02:50 /user/cloudera/example.txt
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 02:32 /user/cloudera/hdfs
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 08:36 /user/cloudera/import_avro
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_avro_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:13 /user/cloudera/json_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:39 /user/cloudera/json_orc
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_orc_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:38 /user/cloudera/json_parquet
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_parquet_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:11 /user/cloudera/orc_dir
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:28 /user/cloudera/output
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:14 /user/cloudera/parquet_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:11 /user/cloudera/parquet_json_write
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 13:40 /user/cloudera/part_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 14:01 /user/cloudera/part_dir2
+-rw-r--r--   1 cloudera cloudera         70 2022-01-20 03:20 /user/cloudera/practice.txt
+-rw-r--r--   1 cloudera cloudera         37 2022-01-09 22:32 /user/cloudera/sample.txt
+-rw-r--r--   1 cloudera cloudera         49 2022-01-11 03:08 /user/cloudera/sample_kpi.csv
+-rw-r--r--   1 cloudera cloudera       1173 2022-01-23 05:19 /user/cloudera/words.txt
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 09:04 /user/cloudera/zeyo_dir
+
+[cloudera@quickstart kpi_hadoop]$ hdfs dfs -cat words.txt /user/cloudera
+It's a truly pleasant experience to read this book, actually I should confess that I laughed A LOT in the reading. The book is hilarious.
+
+Besides the fun part, I was inspired by this book too. This book went through the early history of Personal Computer industry, gave the vivid silhouettes of the people, the companies and Silicon Valley in this industry. Mr.Cringely examined why today's Information Technology industry is what it is now, and how it became like this.
+
+The book provided the facts and opinion about how the high tech companies succeeded, and how many more failed. Why Bill Gates is the richest person in the world, and how Steve Jobs and Steve Wozniak created the most beloved high tech company in the world.
+
+It used to say that reading history can make people understand the rise and fall of things. We can learn the lessons from it, and get new ideas or patterns from the past success. Today Personal Computer is declining, and the focus is shifting to Smart Phone and Tablet. Although product is changing, the similar struggles, fights, winning and loss are still happening lively everyday in this industry, just like what it did in the old days.
+
+
+cat: `/user/cloudera': Is a directory
+[cloudera@quickstart kpi_hadoop]$ 
+
+
+2.	Perform WordCount on the text file using mapreduce.
+
+[cloudera@quickstart ~]$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-map-reduce-examples.jar
+Not a valid JAR: /usr/lib/hadoop-mapreduce/hadoop-map-reduce-examples.jar
+[cloudera@quickstart ~]$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount /user/cloudera/words.txt /user/cloudera/output
+22/01/20 23:36:47 INFO client.RMProxy: Connecting to ResourceManager at quickstart.cloudera/127.0.0.1:8032
+22/01/20 23:36:57 INFO input.FileInputFormat: Total input paths to process : 1
+22/01/20 23:36:59 WARN hdfs.DFSClient: Caught exception 
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Thread.join(Thread.java:1252)
+	at java.lang.Thread.join(Thread.java:1326)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.closeResponder(DFSOutputStream.java:967)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.endBlock(DFSOutputStream.java:705)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:894)
+22/01/20 23:36:59 WARN hdfs.DFSClient: Caught exception 
+java.lang.InterruptedException
+	at java.lang.Object.wait(Native Method)
+	at java.lang.Thread.join(Thread.java:1252)
+	at java.lang.Thread.join(Thread.java:1326)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.closeResponder(DFSOutputStream.java:967)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.endBlock(DFSOutputStream.java:705)
+	at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:894)
+22/01/20 23:36:59 INFO mapreduce.JobSubmitter: number of splits:1
+22/01/20 23:37:02 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1642739418076_0002
+22/01/20 23:37:16 INFO impl.YarnClientImpl: Submitted application application_1642739418076_0002
+22/01/20 23:37:18 INFO mapreduce.Job: The url to track the job: http://quickstart.cloudera:8088/proxy/application_1642739418076_0002/
+22/01/20 23:37:18 INFO mapreduce.Job: Running job: job_1642739418076_0002
+22/01/20 23:39:06 INFO mapreduce.Job: Job job_1642739418076_0002 running in uber mode : false
+22/01/20 23:39:06 INFO mapreduce.Job:  map 0% reduce 0%
+22/01/20 23:40:03 INFO mapreduce.Job:  map 100% reduce 0%
+22/01/20 23:40:18 INFO mapreduce.Job:  map 100% reduce 100%
+22/01/20 23:40:19 INFO mapreduce.Job: Job job_1642739418076_0002 completed successfully
+22/01/20 23:40:20 INFO mapreduce.Job: Counters: 49
+	File System Counters
+		FILE: Number of bytes read=1261
+		FILE: Number of bytes written=297411
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=1293
+		HDFS: Number of bytes written=1143
+		HDFS: Number of read operations=6
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=24435200
+		Total time spent by all reduces in occupied slots (ms)=5496832
+		Total time spent by all map tasks (ms)=47725
+		Total time spent by all reduce tasks (ms)=10736
+		Total vcore-milliseconds taken by all map tasks=47725
+		Total vcore-milliseconds taken by all reduce tasks=10736
+		Total megabyte-milliseconds taken by all map tasks=24435200
+		Total megabyte-milliseconds taken by all reduce tasks=5496832
+	Map-Reduce Framework
+		Map input records=9
+		Map output records=203
+		Map output bytes=1980
+		Map output materialized bytes=1257
+		Input split bytes=120
+		Combine input records=203
+		Combine output records=134
+		Reduce input groups=134
+		Reduce shuffle bytes=1257
+		Reduce input records=134
+		Reduce output records=134
+		Spilled Records=268
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=1324
+		CPU time spent (ms)=2900
+		Physical memory (bytes) snapshot=203337728
+		Virtual memory (bytes) snapshot=3890036736
+		Total committed heap usage (bytes)=101449728
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=1173
+	File Output Format Counters 
+		Bytes Written=1143
+[cloudera@quickstart ~]$ hadoop dfs -ls /user/cloudera/output
+DEPRECATED: Use of this script to execute hdfs command is deprecated.
+Instead use the hdfs command for it.
+
+Found 2 items
+-rw-r--r--   1 cloudera cloudera          0 2022-01-20 23:40 /user/cloudera/output/_SUCCESS
+-rw-r--r--   1 cloudera cloudera       1143 2022-01-20 23:40 /user/cloudera/output/part-r-00000
+[cloudera@quickstart ~]$ hadoop dfs -cat /user/cloudera/output/part-r-00000
+DEPRECATED: Use of this script to execute hdfs command is deprecated.
+Instead use the hdfs command for it.
+
+A	1
+Although	1
+Besides	1
+Bill	1
+Computer	2
+Gates	1
+I	3
+Information	1
+It	1
+It's	1
+Jobs	1
+LOT	1
+Mr.Cringely	1
+Personal	2
+Phone	1
+Silicon	1
+Smart	1
+Steve	2
+Tablet.	1
+Technology	1
+The	2
+This	1
+Today	1
+Valley	1
+We	1
+Why	1
+Wozniak	1
+a	1
+about	1
+actually	1
+and	11
+are	1
+became	1
+beloved	1
+book	4
+book,	1
+by	1
+can	2
+changing,	1
+companies	2
+company	1
+confess	1
+created	1
+days.	1
+declining,	1
+did	1
+early	1
+everyday	1
+examined	1
+experience	1
+facts	1
+failed.	1
+fall	1
+fights,	1
+focus	1
+from	2
+fun	1
+gave	1
+get	1
+happening	1
+high	2
+hilarious.	1
+history	2
+how	4
+ideas	1
+in	6
+industry	1
+industry,	2
+industry.	1
+inspired	1
+is	7
+it	3
+it,	1
+just	1
+laughed	1
+learn	1
+lessons	1
+like	2
+lively	1
+loss	1
+make	1
+many	1
+more	1
+most	1
+new	1
+now,	1
+of	3
+old	1
+opinion	1
+or	1
+part,	1
+past	1
+patterns	1
+people	1
+people,	1
+person	1
+pleasant	1
+product	1
+provided	1
+read	1
+reading	1
+reading.	1
+richest	1
+rise	1
+say	1
+shifting	1
+should	1
+silhouettes	1
+similar	1
+still	1
+struggles,	1
+succeeded,	1
+success.	1
+tech	2
+that	2
+the	18
+things.	1
+this	4
+this.	1
+through	1
+to	3
+today's	1
+too.	1
+truly	1
+understand	1
+used	1
+vivid	1
+was	1
+went	1
+what	2
+why	1
+winning	1
+world,	1
+world.	1
+[cloudera@quickstart ~]$
+
+3.	Create a HBase table ‘Census’ using java with Column Family as ‘Personal’, ‘Professional’.
+
+[cloudera@quickstart ~]$ hbase shell
+OpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release
+OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+22/01/23 05:33:50 INFO Configuration.deprecation: hadoop.native.lib is deprecated. Instead, use io.native.lib.available
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.0-cdh5.13.0, rUnknown, Wed Oct  4 11:16:18 PDT 2017
+
+hbase(main):001:0> create 'census', 'personal', 'professional'
+0 row(s) in 1.7480 seconds
+
+=> Hbase::Table - census
+hbase(main):002:0> describe 'census'
+Table census is ENABLED                                                                                                                                                                                             
+census                                                                                                                                                                                                              
+COLUMN FAMILIES DESCRIPTION                                                                                                                                                                                         
+{NAME => 'personal', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKC
+ACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}                                                                                                                                                     
+{NAME => 'professional', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING => 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BL
+OCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE => '0'}                                                                                                                                                 
+2 row(s) in 0.1350 seconds
+
+hbase(main):003:0> scan 'census'
+ROW                                                    COLUMN+CELL                                                                                                                                                  
+0 row(s) in 0.0760 seconds
+
+
+4. Put 2 rows in the Census table each having columns name and gender in personal and occupation in professional  and display data using HBase shell.
+
+hbase(main):004:0> put 'census', '1', 'personal:name,gender', 'tanuja,female'
+0 row(s) in 0.2480 seconds
+
+hbase(main):005:0> put 'census', '1', 'professional:occupation', 'job'
+0 row(s) in 0.0190 seconds
+
+hbase(main):006:0> scan 'census'
+ROW                                                    COLUMN+CELL                                                                                                                                                  
+ 1                                                     column=personal:name,gender, timestamp=1642944935437, value=tanuja,female                                                                                    
+ 1                                                     column=professional:occupation, timestamp=1642944967259, value=job                                                                                           
+1 row(s) in 0.0200 seconds
+
+hbase(main):007:0> put 'census', '2', 'personal:name,gender', 'chaitanya,female'
+0 row(s) in 0.0250 seconds
+
+hbase(main):014:0> put 'census', '2', 'professional:occupation', 'studying'
+0 row(s) in 0.0110 seconds
+
+hbase(main):015:0> scan 'census'
+ROW                                                    COLUMN+CELL                                                                                                                                                  
+ 1                                                     column=personal:name,gender, timestamp=1642945126654, value=tanuja,female                                                                                    
+ 1                                                     column=professional:occupation, timestamp=1642945141237, value=job                                                                                           
+ 2                                                     column=personal:name,gender, timestamp=1642945166217, value=chaitanya,female                                                                                 
+ 2                                                     column=professional:occupation, timestamp=1642945178630, value=studying                                                                                      
+2 row(s) in 0.0160 seconds
+
+5.	Load the groceries data file using hbase,hive,sqoop with a schema and describe and display the data.
+
+[cloudera@quickstart ~]$ hadoop dfs -put groceries.csv /user/cloudera
+[cloudera@quickstart ~]$ hdfs dfs -ls
+Found 26 items
+drwx------   - cloudera cloudera          0 2022-01-20 03:28 .staging
+drwxr-xr-x   - cloudera cloudera          0 2022-01-12 01:17 CHARACTER_SETS
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:09 avro_json_write
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:15 bigdata
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:15 csv_dir
+-rw-r--r--   1 cloudera cloudera         39 2022-01-20 02:50 example.txt
+-rw-r--r--   1 cloudera cloudera        456 2022-01-23 06:14 groceries.csv
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 02:32 hdfs
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 08:36 import_avro
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_avro_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:13 json_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:39 json_orc
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_orc_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:38 json_parquet
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 json_parquet_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:11 orc_dir
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:28 output
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:14 parquet_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:11 parquet_json_write
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 13:40 part_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 14:01 part_dir2
+-rw-r--r--   1 cloudera cloudera         70 2022-01-20 03:20 practice.txt
+-rw-r--r--   1 cloudera cloudera         37 2022-01-09 22:32 sample.txt
+-rw-r--r--   1 cloudera cloudera         49 2022-01-11 03:08 sample_kpi.csv
+-rw-r--r--   1 cloudera cloudera       1173 2022-01-23 05:19 words.txt
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 09:04 zeyo_dir
+[cloudera@quickstart ~]$ hdfs dfs -ls /user/cloudera
+Found 26 items
+drwx------   - cloudera cloudera          0 2022-01-20 03:28 /user/cloudera/.staging
+drwxr-xr-x   - cloudera cloudera          0 2022-01-12 01:17 /user/cloudera/CHARACTER_SETS
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:09 /user/cloudera/avro_json_write
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:15 /user/cloudera/bigdata
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:15 /user/cloudera/csv_dir
+-rw-r--r--   1 cloudera cloudera         39 2022-01-20 02:50 /user/cloudera/example.txt
+-rw-r--r--   1 cloudera cloudera        456 2022-01-23 06:14 /user/cloudera/groceries.csv
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 02:32 /user/cloudera/hdfs
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 08:36 /user/cloudera/import_avro
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_avro_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:13 /user/cloudera/json_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:39 /user/cloudera/json_orc
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_orc_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:38 /user/cloudera/json_parquet
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 22:56 /user/cloudera/json_parquet_1
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:11 /user/cloudera/orc_dir
+drwxr-xr-x   - cloudera cloudera          0 2022-01-20 03:28 /user/cloudera/output
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 22:14 /user/cloudera/parquet_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-23 23:11 /user/cloudera/parquet_json_write
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 13:40 /user/cloudera/part_dir
+drwxr-xr-x   - cloudera cloudera          0 2020-05-22 14:01 /user/cloudera/part_dir2
+-rw-r--r--   1 cloudera cloudera         70 2022-01-20 03:20 /user/cloudera/practice.txt
+-rw-r--r--   1 cloudera cloudera         37 2022-01-09 22:32 /user/cloudera/sample.txt
+-rw-r--r--   1 cloudera cloudera         49 2022-01-11 03:08 /user/cloudera/sample_kpi.csv
+-rw-r--r--   1 cloudera cloudera       1173 2022-01-23 05:19 /user/cloudera/words.txt
+drwxr-xr-x   - cloudera cloudera          0 2020-06-04 09:04 /user/cloudera/zeyo_dir
+
+
+                                      HBASE
+[cloudera@quickstart ~]$ hbase shell
+OpenJDK 64-Bit Server VM warning: Using incremental CMS is deprecated and will likely be removed in a future release
+OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
+22/01/23 06:18:04 INFO Configuration.deprecation: hadoop.native.lib is deprecated. Instead, use io.native.lib.available
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.0-cdh5.13.0, rUnknown, Wed Oct  4 11:16:18 PDT 2017
+
+hbase(main):001:0> create 'groceries','info'
+0 row(s) in 1.5040 seconds
+
+=> Hbase::Table - groceries
+hbase(main):002:0> scan 'groceries'
+ROW                                                    COLUMN+CELL                                                                                                                                                  
+0 row(s) in 0.3440 seconds
+
+hbase(main):005:0> scan 'groceries'
+ROW                                             COLUMN+CELL                                                                                                                                
+ o1                                             column=info:city, timestamp=1642764326730, value=Bananas                                                                                   
+ o1                                             column=info:date, timestamp=1642764326730, value=7                                                                                         
+ o1                                             column=info:item, timestamp=1642764326730, value=01-01-2017                                                                                
+ o1                                             column=info:itemno, timestamp=1642764326730, value=Seattle                                                                                 
+ o10                                            column=info:city, timestamp=1642764326730, value=Onion                                                                                     
+ o10                                            column=info:date, timestamp=1642764326730, value=4                                                                                         
+ o10                                            column=info:item, timestamp=1642764326730, value=06-01-2017                                                                                
+ o10                                            column=info:itemno, timestamp=1642764326730, value=Issaquah                                                                                
+ o11                                            column=info:city, timestamp=1642764326730, value=Bread                                                                                     
+ o11                                            column=info:date, timestamp=1642764326730, value=5                                                                                         
+ o11                                            column=info:item, timestamp=1642764326730, value=05-01-2017                                                                                
+ o11                                            column=info:itemno, timestamp=1642764326730, value=Renton                                                                                  
+ o12                                            column=info:city, timestamp=1642764326730, value=Onion                                                                                     
+ o12                                            column=info:date, timestamp=1642764326730, value=4                                                                                         
+ o12                                            column=info:item, timestamp=1642764326730, value=07-01-2017                                                                                
+ o12                                            column=info:itemno, timestamp=1642764326730, value=Issaquah                                                                                
+ o13                                            column=info:city, timestamp=1642764326730, value=Bread                                                                                     
+ o13                                            column=info:date, timestamp=1642764326730, value=5                                                                                         
+ o13                                            column=info:item, timestamp=1642764326730, value=07-01-2017                                                                                
+ o13                                            column=info:itemno, timestamp=1642764326730, value=Sammamish                                                                               
+ o14                                            column=info:city, timestamp=1642764326730, value=Tomato                                                                                    
+ o14                                            column=info:date, timestamp=1642764326730, value=6                                                                                         
+ o14                                            column=info:item, timestamp=1642764326730, value=07-01-2017                                                                                
+ o14                                            column=info:itemno, timestamp=1642764326730, value=Issaquah                                                                                
+ o2                                             column=info:city, timestamp=1642764326730, value=Apples                                                                                    
+ o2                                             column=info:date, timestamp=1642764326730, value=20                                                                                        
+ o2                                             column=info:item, timestamp=1642764326730, value=02-01-2017                                                                                
+ o2                                             column=info:itemno, timestamp=1642764326730, value=Kent                                                                                    
+ o3                                             column=info:city, timestamp=1642764326730, value=Flowers                                                                                   
+ o3                                             column=info:date, timestamp=1642764326730, value=10                                                                                        
+ o3                                             column=info:item, timestamp=1642764326730, value=02-01-2017                                                                                
+ o3                                             column=info:itemno, timestamp=1642764326730, value=Bellevue                                                                                
+ o4                                             column=info:city, timestamp=1642764326730, value=Meat                                                                                      
+ o4                                             column=info:date, timestamp=1642764326730, value=40                                                                                        
+ o4                                             column=info:item, timestamp=1642764326730, value=03-01-2017                                                                                
+ o4                                             column=info:itemno, timestamp=1642764326730, value=Redmond                                                                                 
+ o5                                             column=info:city, timestamp=1642764326730, value=Potatoes                                                                                  
+ o5                                             column=info:date, timestamp=1642764326730, value=9                                                                                         
+ o5                                             column=info:item, timestamp=1642764326730, value=04-01-2017                                                                                
+ o5                                             column=info:itemno, timestamp=1642764326730, value=Seattle                                                                                 
+ o6                                             column=info:city, timestamp=1642764326730, value=Bread                                                                                     
+ o6                                             column=info:date, timestamp=1642764326730, value=5                                                                                         
+ o6                                             column=info:item, timestamp=1642764326730, value=04-01-2017                                                                                
+ o6                                             column=info:itemno, timestamp=1642764326730, value=Bellevue                                                                                
+ o7                                             column=info:city, timestamp=1642764326730, value=Bread                                                                                     
+ o7                                             column=info:date, timestamp=1642764326730, value=5                                                                                         
+ o7                                             column=info:item, timestamp=1642764326730, value=05-01-2017                                                                                
+ o7                                             column=info:itemno, timestamp=1642764326730, value=Redmond                                                                                 
+ o8                                             column=info:city, timestamp=1642764326730, value=Onion                                                                                     
+ o8                                             column=info:date, timestamp=1642764326730, value=4                                                                                         
+ o8                                             column=info:item, timestamp=1642764326730, value=05-01-2017                                                                                
+ o8                                             column=info:itemno, timestamp=1642764326730, value=Issaquah                                                                                
+ o9                                             column=info:city, timestamp=1642764326730, value=Cheese                                                                                    
+ o9                                             column=info:date, timestamp=1642764326730, value=15                                                                                        
+ o9                                             column=info:item, timestamp=1642764326730, value=05-01-2017                                                                                
+ o9                                             column=info:itemno, timestamp=1642764326730, value=Redmond                                                                                 
+14 row(s) in 1.4130 seconds
+
